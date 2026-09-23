@@ -5,12 +5,11 @@
   </sub>
 </h1>
 
-> **IBM AI Builders Challenge — July 2026 · Creative Industries theme**
 
 
-![StoryForge AI — Your story, fully realized](/storyforge-ai/assets/hero.png)
+![StoryForge AI - Your story, fully realized](/storyforge-ai/assets/hero.png)
 **"One sentence becomes a complete story pitch deck"**
-Story outline, characters, world-building, concept art, audio narration, and a downloadable PDF — powered by **IBM Granite**
+Story outline, characters, world-building, concept art, audio narration, and a downloadable PDF - powered by **IBM Granite**
 
 ## The Problem
 
@@ -21,7 +20,7 @@ Existing AI tools solve these pieces in isolation across different tabs. Nobody 
 
 ## The Solution
 
-StoryForge AI takes a single line of user input — e.g. *"A blind cartographer discovers the world is flat"* — and generates a complete, publication-quality **Story Pitch Deck** in under 60 seconds:
+StoryForge AI takes a single line of user input - e.g. *"A blind cartographer discovers the world is flat"* - and generates a complete, publication-quality **Story Pitch Deck** in under 60 seconds:
 
 ## 🎯 Watch It In Action
  
@@ -44,7 +43,7 @@ StoryForge AI takes a single line of user input — e.g. *"A blind cartographer 
 </p>
  
 
-*Watch a complete pitch deck come together in real-time — story, characters, images, and world-building all coherently generated.*
+*Watch a complete pitch deck come together in real-time - story, characters, images, and world-building all coherently generated.*
  
 ---
  
@@ -280,42 +279,3 @@ storyforge-ai/
 ```
 
 ---
-
-## How IBM Bob Was Used
-
-IBM Bob was the **primary development tool** for this project — every significant piece of code was built with Bob. This is a requirement of the IBM AI Builders challenge and also genuinely how the app was built.
-
-### What Bob built, session by session
-
-| Phase | What Bob built |
-|---|---|
-| **Phase 1 — Foundation** | Full Next.js scaffold, `lib/types.ts` (all TypeScript interfaces and constants), `lib/prompts.ts` (all 4 prompt templates with JSON schemas), `lib/granite.ts` (watsonx.ai client, retry logic, JSON parsing), `lib/replicate.ts` (Pollinations FLUX client), `app/api/generate/route.ts` (sequential chain), `app/api/images/route.ts` |
-| **Phase 2 — Features** | `app/api/narrate/route.ts` (ElevenLabs TTS with per-genre voice profiles and per-act dynamics), advanced `StoryOptions` type with 6 fields, all advanced prompt engineering (tone/ending/audience/era constraints baked into every Granite call), `lib/pdfExport.ts` (full styled A4 with images) |
-| **Phase 2 — UI** | All UI components: `PromptInput.tsx` (genre/scope/advanced panel), `LoadingPipeline.tsx`, `StorySection.tsx`, `CharacterCard.tsx`, `WorldSection.tsx`, `ArtGrid.tsx`, `ExportButton.tsx`, `app/page.tsx` (full wiring, dark mode, error states) |
-| **Phase 3 — Bug fixes** | Audio fix (server-side `sleep()` timeout → client-side 2-sweep retry), image display fix (`aspect-square` + `object-cover`), PDF layout fix (theme/tone line overflow), image prompt revert |
-| **Phase 3b — Beyond PRD** | `app/api/regenerate/route.ts` (per-section Granite regen endpoint), `singleArtPrompt` template, per-section Regenerate + Rollback/Keep UX across all 3 text sections and all 4 image slots, `DemoDeck.tsx` static component, `AbortController` wiring, parallel audio+image lane architecture |
-
-### How Bob was used in practice
-
-- **One task per concern** — each phase and each major component was a separate Bob task, keeping context tight and outputs focused.
-- **Iterative refinement** — Bug fixes were their own sessions. Bob was shown the exact error (e.g. `Act 2 + Act 3 audio silent`) and the root cause was diagnosed and fixed without touching unrelated code.
-- **Prompt engineering collaboration** — The `lib/prompts.ts` templates evolved through Bob sessions, with each iteration producing better-structured JSON outputs from Granite.
-- **Architecture decisions first** — The sequential chain vs. LangGraph decision, the jsPDF vs. html2canvas decision, and the Pollinations vs. Replicate switch were all reasoned through with Bob before writing a line of code.
-
----
-
-## Challenge Alignment
-
-| Judging Criterion | How StoryForge AI addresses it |
-|---|---|
-| **Technical Execution** | Sequential LLM prompt chain with structured JSON outputs; parallel audio+image lanes; per-section regeneration with rollback; server-side API routes with proper secret management; type-safe throughout with `tsc --noEmit` passing at 0 errors |
-| **Innovation** | Multi-agent AI architecture- Combines structured story generation + coherent world-building + AI concept art + per-act audio narration + one-click styled PDF into a single seamless flow — and adds per-section + per-image regeneration with rollback UX |
-| **Challenge Fit** | Directly embodies "AI as a creative partner for creative industries" — Granite maintains creative coherence across five interdependent outputs |
-| **Feasibility** | Single repo, three API keys, zero infrastructure — runs locally with `npm run dev` |
-| **Real-World Impact** | Writers, game designers, and indie creators spend hours creating pitches manually. This turns that into 60 seconds and produces a shareable, professional document |
-
----
-
-
-*Built for the IBM AI Builders — July 2026 Challenge: Reimagine Creative Industries with AI.*
-*Primary dev tool: IBM Bob.*
